@@ -1,0 +1,83 @@
+$(document).ready(function(){
+	$.ajax({
+		url : "./data.php",
+		type : "GET",
+		success : function(data){
+			console.log(data);
+			var temps = [];
+			var humidity_sensor1 = [];
+			var humidity_sensor2 = [];
+			var temperature_sensor1 = [];
+			var temperature_sensor2 = [];
+
+			for(var i in data) {
+				//console.log(obj.data[i].Time);
+				//temps.push(data[i].Time);
+				humidity_sensor1.push("{x:"+data[i].Time+ ", y:"+data[i].Ms1 +"}");
+				//humidity_sensor2.push(data[i].Ms2);
+				//temperature_sensor1.push(data[i].Ts1);
+				//temperature_sensor2.push(data[i].Ts2);
+			}
+
+			var chartdata = {
+				//type: 'line',
+				datasets: [
+					{
+						//label: "Ms1",
+						//fill: false,
+						//lineTension: 0.1,
+						//backgroundColor: "rgba(59, 89, 152, 0.75)",
+						//borderColor: "rgba(59, 89, 152, 1)",
+						//pointHoverBackgroundColor: "rgba(59, 89, 152, 1)",
+						//pointHoverBorderColor: "rgba(59, 89, 152, 1)",
+						humidity_sensor1
+					}
+				]
+			};
+		console.log(typeof humidity_sensor1);
+
+
+			var ctx = $("#mycanvas");
+
+			var LineGraph = new Chart(ctx, 
+				{
+				type: 'line',
+				data: chartdata,
+				options:{
+                			//responsive: true,
+			                //title:
+					//	{
+		                   	//	display:true,
+                    			//	text:"Chart.js Time Point Data"
+                			//	},
+                		scales: {
+                    			xAxes: [{
+                        			type: "time",
+						time:	{
+							unit:'',
+							displayFormats:{ 'month': 'MMM YYYY'}
+                       					}
+                        			display: true,
+                        			scaleLabel: 
+							{
+                            				display: true,
+                            				labelString: 'Date'
+                        				}
+                    				}],
+                    			yAxes: [{
+                        			display: true,
+                        			scaleLabel: 
+							{
+                            				display: true,
+                            				labelString: 'value'
+                        				}
+                    				}]
+                			}
+					}
+				});
+		},
+		error : function(data) {
+
+		}
+	});
+});
