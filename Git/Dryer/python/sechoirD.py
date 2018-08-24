@@ -442,8 +442,8 @@ def writeDAC(speedmotor):
 def sendmail(eMs2):
 
      
-    fromaddr = "sechoir.rouffach@gmail.com"
-    toaddr = "charlie068@gmail.com"    #destinataire
+    fromaddr = "xxxx@gmail.com"
+    toaddr = "xxxxxx@gmail.com"    #destinataire
      
     msg = MIMEMultipart()
      
@@ -457,7 +457,7 @@ def sendmail(eMs2):
 
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
-    server.login(fromaddr, "sechoir10!")
+    server.login(fromaddr, "xxxxx")
     text = msg.as_string()
     server.sendmail(fromaddr, toaddr, text)
     server.quit()
